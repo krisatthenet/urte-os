@@ -36,7 +36,7 @@ Transitive (resolved by Cargo): `crossbeam-deque`, `crossbeam-epoch`,
 
 ```sh
 cd ../kernel-rs
-cargo test          # 16 tests
+cargo test          # 19 tests
 cargo run --example run_pipeline
 cargo run --example sql_mesh
 ```

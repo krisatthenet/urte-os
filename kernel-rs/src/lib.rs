@@ -88,6 +88,28 @@ mod tests {
     }
 
     #[test]
+    fn upl_drives_fabrication_pipeline() {
+        use std::collections::HashMap;
+        let src = r#"
+            pipeline "fabricate" {
+                scale molecular;
+                stage sensing;
+                stage crawling;
+                stage selection;
+                stage fabrication;
+                stage assembly;
+                stage dissemination;
+                emit "fabrication run complete";
+            }
+        "#;
+        let results = compile_and_run(src, &HashMap::new()).expect("run");
+        assert_eq!(results[0].stages.len(), 6);
+        assert!(!results[0].blocked);
+        // the model's fabrication flow matches Stage::FABRICATION
+        assert_eq!(results[0].stages.as_slice(), &Stage::FABRICATION[..]);
+    }
+
+    #[test]
     fn guardrail_blocks_high_magnitude_release() {
         let mut env = HashMap::new();
         env.insert("magnitude".to_string(), 0.9);

@@ -2,7 +2,7 @@
 
 [![Repo](https://img.shields.io/badge/GitHub-krisatthenet%2Furte--os-181717?logo=github)](https://github.com/krisatthenet/urte-os)
 [![Rust](https://img.shields.io/badge/Rust-1.96-000000?logo=rust)](kernel-rs/)
-[![Tests](https://img.shields.io/badge/tests-18%20passing-brightgreen)](kernel-rs/src/lib.rs)
+[![Tests](https://img.shields.io/badge/tests-19%20passing-brightgreen)](kernel-rs/src/lib.rs)
 [![Standard](https://img.shields.io/badge/POSIX-IEEE%20Std%201003.1--2024-0033cc)](docs/URTE_POSIX_Kernel_Technical_Specification.pdf)
 
 POSIX-conformant core of the operating system for the **Universal Regeneration

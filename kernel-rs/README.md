@@ -158,7 +158,7 @@ let (dropped, passed, split) = g.provenance().variability();
 
 ```sh
 cargo build
-cargo test                       # 16 tests
+cargo test                       # 19 tests
 cargo run --example run_pipeline
 cargo run --example sql_mesh
 cargo run --example rtos_flow     # RTOS -> actor -> NiFi flow -> SQL
@@ -174,7 +174,7 @@ the `-1`/`errno` contract of the C headers.
 
 ## Status
 
-Builds and passes **16/16 tests** on `stable-x86_64-pc-windows-gnu` (rustc 1.96).
+Builds and passes **19/19 tests** on `stable-x86_64-pc-windows-gnu` (rustc 1.96).
 All three examples run. The POSIX core primitives (state vectors, guardrails,
 channels) keep `ENOSYS`/`TODO` kernel-side mechanics; the compiler, interpreter,
 RTOS, actor, parallel, SQL, and flow layers are functional.

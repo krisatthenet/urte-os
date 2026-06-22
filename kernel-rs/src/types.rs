@@ -76,6 +76,7 @@ pub enum Decision {
 /// in execution order (Sensing first, mitigation last).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Stage {
+    // Operational activity pipeline (Sensing -> therapy delivery mitigation).
     Sensing,
     DataGathering,
     Memorization,
@@ -88,9 +89,16 @@ pub enum Stage {
     MeasureSelectorCheck,
     ReactorTherapyAssumption,
     TherapyDeliveryMitigation,
+    // Fabrication / terraforming flow (Sensing -> Dissemination).
+    Crawling,
+    Selection,
+    Fabrication,
+    Assembly,
+    Dissemination,
 }
 
 impl Stage {
+    /// Operational activity pipeline, in execution order.
     pub const PIPELINE: [Stage; 12] = [
         Stage::Sensing,
         Stage::DataGathering,
@@ -104,6 +112,16 @@ impl Stage {
         Stage::MeasureSelectorCheck,
         Stage::ReactorTherapyAssumption,
         Stage::TherapyDeliveryMitigation,
+    ];
+
+    /// Fabrication / terraforming pipeline (model: `fabricationPipeline`).
+    pub const FABRICATION: [Stage; 6] = [
+        Stage::Sensing,
+        Stage::Crawling,
+        Stage::Selection,
+        Stage::Fabrication,
+        Stage::Assembly,
+        Stage::Dissemination,
     ];
 
     /// Parse from the snake_case identifier used in the pipeline DSL.
@@ -121,6 +139,11 @@ impl Stage {
             "measure_selector_check" => Stage::MeasureSelectorCheck,
             "reactor_therapy_assumption" => Stage::ReactorTherapyAssumption,
             "therapy_delivery_mitigation" => Stage::TherapyDeliveryMitigation,
+            "crawling" => Stage::Crawling,
+            "selection" => Stage::Selection,
+            "fabrication" => Stage::Fabrication,
+            "assembly" => Stage::Assembly,
+            "dissemination" => Stage::Dissemination,
             _ => return None,
         })
     }
@@ -139,6 +162,11 @@ impl Stage {
             Stage::MeasureSelectorCheck => "measure selector check",
             Stage::ReactorTherapyAssumption => "reactor therapy assumption",
             Stage::TherapyDeliveryMitigation => "therapy delivery mitigation",
+            Stage::Crawling => "Crawling",
+            Stage::Selection => "Selection",
+            Stage::Fabrication => "Fabrication",
+            Stage::Assembly => "Assembly",
+            Stage::Dissemination => "Dissemination",
         }
     }
 }
