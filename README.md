@@ -86,7 +86,7 @@ Interface layer: **complete**.
 
 ## License
 
-Copyright © 2026 Kristupas Gelžinis. All rights reserved except as granted below.
+Copyright © 2026 Kristupas Gelžinis and Olek Suchodolski. All rights reserved except as granted below.
 
 This work — source code, models, and documentation — is licensed under the
 **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International**
