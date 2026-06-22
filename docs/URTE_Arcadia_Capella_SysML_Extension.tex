@@ -1,0 +1,489 @@
+\documentclass[11pt,a4paper]{report}
+
+% Packages
+\usepackage[margin=0.9in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc, fit, backgrounds}
+
+% Colors
+\definecolor{urteg}{RGB}{0,128,128}
+\definecolor{arcadiablue}{RGB}{0,82,147}
+\definecolor{capellagreen}{RGB}{0,128,0}
+\definecolor{sectblue}{RGB}{0,51,102}
+
+% Listings for SysML/Arcadia textual schemas
+\lstdefinestyle{sysmlstyle}{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!8},
+    keywordstyle=\color{arcadiablue}\bfseries,
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small URTE Arcadia/Capella MBSE Extension | Confidential}
+\fancyhead[R]{\small June 2026 | v1.0}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section formatting
+\titleformat{\chapter}{\Large\bfseries\color{sectblue}}{\thechapter.}{0.5em}{}
+\titleformat{\section}{\large\bfseries\color{arcadiablue}}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{urteg}}{\thesubsection}{0.5em}{}
+
+% Title
+\title{\textbf{URTE Arcadia / Capella MBSE Extension}\\[0.3cm]
+\large SysML Viewpoints and Extended Schemas\\[0.2cm]
+\normalsize Compliant with \textbf{Arcadia} Method and \textbf{Capella} Tooling\\[0.4cm]
+for the\\
+\textbf{Universal Regeneration Therapy Ecosystem (URTE)}}
+\author{
+    \textbf{Prepared by:}\\[0.1cm]
+    Grok xAI Research \& UAB Saptera\\[0.1cm]
+    Kristupas Gelzinis \& Olek Suchodolski\\[0.3cm]
+    \textit{Extension of URTE MBSE Document (June 2026)}\\[0.1cm]
+    \textit{Based on URTE Architecture Document, Investment Prospectus,}\\
+    \textit{Infrastructure Model, and Situation Room Briefing}
+}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent This document extends the URTE MBSE baseline with detailed \textbf{Arcadia}-compliant viewpoints and \textbf{SysML}-like schemas suitable for direct implementation in the \textbf{Capella} open-source MBSE tool.
+
+It applies the full Arcadia method (Operational Analysis, System Analysis, Logical Architecture, Physical Architecture, and EPBS) to the Universal Regeneration Therapy Ecosystem. All schemas are provided in textual/SysML-inspired notation that can be recreated in Capella using standard Arcadia viewpoints, allowing traceability from operational needs through to physical deployment while preserving the scale-invariant, TRL Pull, and ethical-by-design principles of URTE.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%==============================================================================
+\chapter{Introduction to Arcadia Method for URTE}
+%==============================================================================
+
+\section{Why Arcadia / Capella for URTE?}
+
+The URTE system is a complex, multi-scale, socio-technical System-of-Systems involving:
+- Biological and synthetic components (bionanorobots, cell/gene therapies)
+- AI-intensive software (digital twins, generative design, RL optimizers)
+- Physical deployment across clinical, terrestrial, and space environments
+- Strong ethical, regulatory, and planetary-boundary governance constraints
+
+\textbf{Arcadia} (developed by Thales) provides a structured, viewpoint-based methodology that is particularly well-suited because it emphasizes:
+- Clear separation between \textbf{what} the system must do (Operational & System Analysis) and \textbf{how} it is realized (Logical & Physical Architecture)
+- Strong support for \textbf{functional chains} and \textbf{data flows} across scales — critical for URTE’s cross-scale coupling
+- Built-in traceability and impact analysis — essential for TRL Pull mechanism and regulatory compliance
+- Native support in the free \textbf{Capella} tool, enabling collaborative MBSE without heavy licensing costs
+
+This extension document maps the existing URTE 6-layer architecture and biomathematical models into standard Arcadia viewpoints, providing ready-to-use schemas for Capella implementation.
+
+\section{Arcadia Viewpoint Structure Applied to URTE}
+
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.5cm} p{10cm}}
+\toprule
+\textbf{Arcadia Viewpoint} & \textbf{URTE Focus \& Key Artifacts} \\
+\midrule
+\textbf{Operational Analysis (OA)} & Operational Capabilities (e.g., ``Regenerate damaged tissue at subcellular scale'', ``Restore ecosystem resilience at landscape scale''), Operational Entities (Clinicians, Ecologists, Space Agencies, Ethics Boards), Operational Activities and Scenarios \\
+\textbf{System Analysis (SA)} & System Capabilities, System Functions (allocated from the 6 layers), Functional Chains (Intervention Lifecycle, TRL Pull Flywheel, Cross-Scale Learning), System Actors, Data Model (multi-scale state vectors $u_s$) \\
+\textbf{Logical Architecture (LA)} & Logical Components (the 6 URTE layers as reusable Logical Components with Ports \& Interfaces), Logical Functions, Logical Data Flows, Allocation of Functions to Components \\
+\textbf{Physical Architecture (PA)} & Physical Nodes (Ground Mission Control, Clinical Deployment Hubs, Field Kits, MedInt Satellite Constellation, Orbital/Lunar Precursors), Physical Components, Deployment of Logical Components, Physical Links \\
+\textbf{EPBS} & Configuration Items, Versioned Builds, Safety/Security Classification per Component \\
+\bottomrule
+\end{tabular}
+
+%==============================================================================
+\chapter{Operational Analysis (OA) Viewpoint}
+%==============================================================================
+
+\section{Operational Capabilities}
+
+\begin{enumerate}[label=OC-\arabic*]
+    \item Regenerate living systems at molecular/cellular scale with precision and safety.
+    \item Restore ecosystem functions and resilience at landscape/regional scale.
+    \item Enable controlled planetary regeneration precursors and bio-regen + ISRU for space habitats.
+    \item Accelerate technology maturation across domains via TRL Pull mechanism.
+    \item Enforce ethical, planetary-boundary, and governance constraints on all interventions.
+\end{enumerate}
+
+\section{Operational Entities \& Actors}
+
+\begin{itemize}
+    \item \textbf{Clinician / Patient Entity}
+    \item \textbf{Ecologist / Restoration Practitioner}
+    \item \textbf{Space Agency / ISRU Engineer}
+    \item \textbf{Multi-Stakeholder Ethics Board}
+    \item \textbf{Regulatory Authority (FDA/EMA/UN)}
+    \item \textbf{General Public / Civil Society}
+\end{itemize}
+
+\section{Operational Architecture Diagram (Textual SysML-inspired)}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Operational Architecture (OA) -- Textual Representation for Capella}]
+Operational Architecture [OA]
+├── Operational Entities
+│   ├── Clinician/Patient
+│   ├── Ecologist/Restoration Team
+│   ├── Space Agency/ISRU Team
+│   ├── Ethics Board (Multi-Stakeholder)
+│   └── Regulatory Authority
+├── Operational Activities
+│   ├── OA.1 Perform Subcellular Repair
+│   ├── OA.2 Execute Landscape Restoration
+│   ├── OA.3 Conduct Mars/Moon Analog Campaign
+│   ├── OA.4 Authorize High-Impact Intervention (Ethics Gate)
+│   └── OA.5 Monitor Planetary Boundary Indicators
+├── Operational Capabilities
+│   ├── OC.1 Precision Multi-Scale Regeneration
+│   ├── OC.2 TRL Pull Acceleration
+│   └── OC.3 Ethical & Planetary Guardrail Enforcement
+└── Operational Scenarios
+    ├── Scenario 1: First-in-Human Bionanorobot Therapy (with sandbox progression)
+    └── Scenario 2: Cross-Domain Learning -- Clinical success improves ecosystem model
+\end{lstlisting}
+
+%==============================================================================
+\chapter{System Analysis (SA) Viewpoint}
+%==============================================================================
+
+\section{System Capabilities}
+
+\begin{enumerate}[label=SC-\arabic*]
+    \item SC.1 Provide unified multi-scale digital twin simulation (molecular $\leftrightarrow$ planetary)
+    \item SC.2 Generate and optimize intervention protocols under guardrails
+    \item SC.3 Execute progressive sandboxed physical interventions
+    \item SC.4 Enable closed-loop cross-domain learning and TRL Pull
+    \item SC.5 Maintain full traceability, auditability, and ethical oversight
+\end{enumerate}
+
+\section{System Functions (Derived from URTE 6 Layers)}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.2cm} p{8cm} p{3.5cm}}
+\toprule
+\textbf{Function ID} & \textbf{System Function Description} & \textbf{Allocated to Layer} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Function ID} & \textbf{System Function Description} & \textbf{Allocated to Layer} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+F.1.1 & Authorize intervention via multi-stakeholder ethics board & Layer 1 \\
+F.1.2 & Enforce planetary-boundary mathematical guardrails & Layer 1 + 2 \\
+F.2.1 & Run Physics-Informed Neural Network (PINN) multi-scale simulation & Layer 2 \\
+F.2.2 & Generate candidate intervention protocols (generative design) & Layer 2 \\
+F.2.3 & Optimize interventions via stochastic optimal control (J(u)) & Layer 2 \\
+F.2.4 & Perform uncertainty quantification & tipping-point early warning & Layer 2 \\
+F.3.1 & Execute high-TRL clinical regen modules (cell/gene, bioprinting) & Layer 3 \\
+F.4.1 & Execute eco-planetary regen protocols & Layer 4 \\
+F.5.1 & Deploy bionanorobot swarms with kill-switches & containment & Layer 5 \\
+F.5.2 & Collect real-time telemetry from all scales & Layer 5 \\
+F.6.1 & Update digital twin models from outcome data & Layer 6 \\
+F.6.2 & Perform cross-domain learning (clinical $\leftrightarrow$ ecological) & Layer 6 \\
+\bottomrule
+\end{longtable}
+
+\section{Key Functional Chain: Intervention Lifecycle with TRL Pull (Activity Diagram - Textual)}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Functional Chain: End-to-End Intervention Lifecycle + TRL Pull}]
+Functional Chain: Intervention Lifecycle with TRL Pull (SA)
+Start
+  --> [F.1.1] Ethics Board Authorization Gate
+  --> [F.2.2] Generative Protocol Designer (Layer 2)
+  --> [F.2.3] RL Optimizer with Guardrails (R, planetary boundaries)
+  --> Decision: High-Impact? --> [F.1.1] Ethics Veto possible
+  --> [F.5.1] Progressive Sandbox Deployment (in-vitro -> animal -> controlled pilot)
+  --> [F.5.2] Real-time Telemetry Collection
+  --> [F.6.1] Digital Twin Model Update
+  --> [F.6.2] Cross-Domain Learning --> TRL Pull to lower-maturity modules
+  --> End (Outcome logged + Audit trail complete)
+\end{lstlisting}
+
+\section{Data Model -- Multi-Scale State Vector (SysML Block)}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Data Model: Multi-Scale State Vector (SysML Block Definition)}]
+Block: MultiScaleStateVector
+  Attributes:
+    + scaleLevel: ScaleEnum {Molecular, Cellular, Tissue, Organ, Ecosystem, Regional, Planetary}
+    + u_s: StateVector          // concentrations, stress, biomass, CO2, etc.
+    + lambda_dom: Real          // dominant eigenvalue for resilience R
+    + variance: Real            // early-warning indicator
+    + lag1_autocorr: Real
+    + skewness: Real
+    + kurtosis: Real
+  Operations:
+    + computeResilience(): Real     // R = -lambda_dom
+    + detectTippingPoint(): Boolean
+  Constraints:
+    {planetaryBoundaryGuardrails enforced on all u_s updates}
+\end{lstlisting}
+
+%==============================================================================
+\chapter{Logical Architecture (LA) Viewpoint}
+%==============================================================================
+
+\section{Logical Components (Mapping URTE 6 Layers)}
+
+The six URTE layers are modeled as reusable **Logical Components** with well-defined ports and interfaces. This enables strong modularity and traceability.
+
+\begin{lstlisting}[style=sysmlstyle, caption={Logical Architecture (LA) -- URTE Layers as Logical Components}]
+Logical Architecture [LA]
+├── Logical Component: CommandAndGovernance (Layer 1)
+│   Ports:
+│     - EthicsVetoPort (in/out)
+│     - RegulatoryInterfacePort
+│     - AuditLogPort
+│   Allocated Functions: F.1.1, F.1.2
+│
+├── Logical Component: AIOrchestrationAndMultiScaleSimulation (Layer 2)
+│   Ports:
+│     - TwinInputPort (sensor data, u_s)
+│     - ProtocolOutputPort (candidate interventions)
+│     - GuardrailEnforcementPort
+│   Allocated Functions: F.2.1 -- F.2.4
+│
+├── Logical Component: BiologicalRegenSubsystem (Layer 3)
+│   Ports:
+│     - ClinicalDataPort
+│     - TherapyExecutionPort
+│   Allocated Functions: F.3.1
+│   Note: Primary TRL Pull revenue & data source (TRL 6-9)
+│
+├── Logical Component: EcoPlanetaryRegenSubsystem (Layer 4)
+│   Ports:
+│     - EcoTelemetryPort
+│     - RestorationProtocolPort
+│   Allocated Functions: F.4.1
+│
+├── Logical Component: SensingActuationAndDeployment (Layer 5)
+│   Ports:
+│     - TelemetryOutPort
+│     - InterventionCommandPort
+│     - KillSwitchPort (safety)
+│   Allocated Functions: F.5.1, F.5.2
+│   Sub-Components:
+│     - BionanorobotSwarm (with velocity regime models)
+│     - IoTSensorNetwork
+│     - BioreactorBioprinterFleet
+│
+└── Logical Component: ContinuousFeedbackAndLearningLoop (Layer 6)
+    Ports:
+      - ModelUpdatePort
+      - CrossDomainLearningPort
+    Allocated Functions: F.6.1, F.6.2
+    Note: Implements Virtuous Evidence Flywheel + TRL Pull
+\end{lstlisting}
+
+\section{Logical Internal Block Diagram (IBD) -- Simplified Textual}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Logical IBD: Cross-Layer Data Flow (Arcadia Style)}]
+Logical IBD: URTE Core Data Flow
+[CommandAndGovernance] --EthicsVeto--> [AIOrchestration...]
+[AIOrchestration...] --Protocol--> [SensingActuation...]
+[SensingActuation...] --Telemetry--> [ContinuousFeedback...]
+[ContinuousFeedback...] --ModelUpdate--> [AIOrchestration...]
+[BiologicalRegen] --ClinicalOutcomeData--> [ContinuousFeedback...]  // TRL Pull source
+[EcoPlanetaryRegen] --EcoOutcomeData--> [ContinuousFeedback...]
+\end{lstlisting}
+
+%==============================================================================
+\chapter{Physical Architecture (PA) Viewpoint}
+%==============================================================================
+
+\section{Physical Nodes \& Deployment}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Physical Architecture (PA) -- Nodes and Deployment}]
+Physical Architecture [PA]
+├── Physical Node: GroundMissionControlCenter
+│   Hosts: CommandAndGovernance (Layer 1)
+│          AIOrchestrationAndMultiScaleSimulation (Layer 2)
+│          ContinuousFeedbackAndLearningLoop (Layer 6)
+│   Links: High-bandwidth to Clinical Hubs and Satellite Ground Stations
+│
+├── Physical Node: ClinicalDeploymentHub
+│   Hosts: BiologicalRegenSubsystem (Layer 3) + parts of Layer 5
+│   Components: Bioprinters, Robotic Surgical Systems, Local Telemetry Cache
+│
+├── Physical Node: FieldEcoRestorationKit (mobile/edge)
+│   Hosts: parts of EcoPlanetaryRegenSubsystem + SensingActuation
+│   Components: Drone Swarms, IoT Gateways, Portable Bioreactors
+│
+├── Physical Node: MedIntSatelliteConstellation (Ecological Measurement)
+│   Hosts: parts of Layer 5 (remote sensing + telemetry relay)
+│   Links: to GroundMissionControl and SpaceStationGovernanceNode
+│
+└── Physical Node: SpaceStationGovernanceNode (Phase 3+)
+    Hosts: Governance oversight for MedInt constellation + precursor bio-regen payloads
+    Links: to Orbital/Lunar Bio-Regen + ISRU Modules
+\end{lstlisting}
+
+\section{Physical Deployment Diagram (Textual)}
+
+\begin{lstlisting}[style=sysmlstyle, caption={Physical Deployment: URTE Components to Nodes}]
+Deployment:
+  CommandAndGovernance          --> GroundMissionControlCenter
+  AIOrchestration...            --> GroundMissionControlCenter
+  BiologicalRegenSubsystem      --> ClinicalDeploymentHub
+  EcoPlanetaryRegenSubsystem    --> FieldEcoRestorationKit + GroundMissionControlCenter
+  SensingActuation...           --> ClinicalDeploymentHub + FieldEcoRestorationKit + MedIntSatellites
+  ContinuousFeedback...         --> GroundMissionControlCenter
+\end{lstlisting}
+
+%==============================================================================
+\chapter{EPBS and Configuration Management}
+%==============================================================================
+
+\textbf{End-Product Breakdown Structure (EPBS)} for URTE Phase 1 (recommended Capella structure):
+
+\begin{itemize}
+    \item \textbf{URTE Core Platform v1.0} (Configuration Item)
+          \begin{itemize}
+              \item Digital Twin Engine (PINN-based)
+              \item AI Orchestration Module
+              \item Governance \& Ethics Dashboard
+              \item Bionanorobot Sandbox Kit (v0.8)
+          \end{itemize}
+    \item \textbf{Clinical Pilot Deployment Package}
+    \item \textbf{Terrestrial Eco-Restoration Pilot Package}
+    \item \textbf{Data Standards \& API Library} (open source part)
+\end{itemize}
+
+Each Configuration Item carries safety classification, TRL level, and traceability to requirements.
+
+%==============================================================================
+\chapter{Cross-Viewpoint Traceability \& Capella Implementation Guidance}
+%==============================================================================
+
+\section{Traceability Matrix (Excerpt)}
+
+\begin{tabular}{lll}
+\toprule
+\textbf{Arcadia Element} & \textbf{URTE MBSE Requirement} & \textbf{TRL / Phase} \\
+\midrule
+Operational Capability OC.1 & FR-01, SR-01 & Phase 1--3 \\
+Functional Chain "Intervention Lifecycle + TRL Pull" & FR-04, NFR-03 & All Phases \\
+Logical Component "AIOrchestration..." & FR-01, FR-02 & Phase 1 \\
+Physical Node "MedIntSatelliteConstellation" & Phase 3 roadmap & Phase 3 \\
+\bottomrule
+\end{tabular}
+
+\section{Recommended Capella Project Structure}
+
+\begin{enumerate}
+    \item Create new Capella project: \texttt{URTE\_MBSE\_v1}
+    \item Use standard Arcadia viewpoints in order:
+          \begin{enumerate}
+              \item Operational Analysis
+              \item System Analysis
+              \item Logical Architecture
+              \item Physical Architecture
+              \item EPBS
+          \end{enumerate}
+    \item Define reusable libraries for:
+          \begin{itemize}
+              \item MultiScaleStateVector (Data)
+              \item BionanorobotSwarm (Logical + Physical)
+              \item GuardrailConstraints (Constraints)
+          \end{itemize}
+    \item Use Capella’s built-in traceability matrix and impact analysis views for TRL Pull and regulatory evidence.
+    \item Export diagrams as images or SVG for inclusion in documentation (or use Capella’s HTML/Word export).
+\end{enumerate}
+
+%==============================================================================
+\chapter{Conclusion and Next Steps}
+%==============================================================================
+
+This Arcadia/Capella extension provides a complete set of viewpoints and textual SysML schemas that faithfully represent the URTE system while being directly implementable in the free Capella tool.
+
+\textbf{Recommended immediate next steps:}
+\begin{enumerate}
+    \item Import the Logical Components and Functional Chains into Capella.
+    \item Create the first version of the multi-scale data model as a shared library.
+    \item Define initial Operational Scenarios for the four Phase 1 pilots.
+    \item Run Capella’s validation rules to ensure consistency across viewpoints.
+    \item Generate documentation exports for integration into the main URTE MBSE Document.
+\end{enumerate}
+
+The combination of the original URTE MBSE Document + this Arcadia extension gives a full, tool-ready MBSE baseline aligned with both academic best practices (SEBoK/SWEBOK) and industrial methodology (Arcadia/Capella).
+
+\vspace{0.8cm}
+\begin{center}
+\textit{--- End of URTE Arcadia / Capella MBSE Extension v1.0 ---}
+\end{center}
+
+%==============================================================================
+\appendix
+%==============================================================================
+
+\chapter{Quick Reference: Arcadia Viewpoint Mapping to URTE Layers}
+
+\begin{tabular}{p{4cm}p{5cm}p{5cm}}
+\toprule
+\textbf{Arcadia View} & \textbf{URTE Layer Focus} & \textbf{Key SysML Element} \\
+\midrule
+Operational Analysis & Stakeholder needs across clinical, eco, space & Operational Capabilities + Scenarios \\
+System Analysis & What the system must achieve (6-layer functions) & System Functions + Functional Chains \\
+Logical Architecture & How the system is structured (reusable components) & Logical Components (6 layers) + Ports \\
+Physical Architecture & Where and how it is deployed (nodes) & Physical Nodes + Deployment \\
+EPBS & Configuration \& build management & Configuration Items \\
+\bottomrule
+\end{tabular}
+
+\chapter{Selected Extended ASCII SysML Diagrams}
+
+\section{Block Definition Diagram (BDD) -- URTE Core Logical Components}
+
+\begin{lstlisting}[style=sysmlstyle]
+BDD: URTE_Logical_Components
+block CommandAndGovernance
+block AIOrchestrationAndMultiScaleSimulation
+block BiologicalRegenSubsystem
+block EcoPlanetaryRegenSubsystem
+block SensingActuationAndDeployment {
+    block BionanorobotSwarm
+}
+block ContinuousFeedbackAndLearningLoop
+
+AIOrchestrationAndMultiScaleSimulation --> BiologicalRegenSubsystem : <<allocate>>
+AIOrchestrationAndMultiScaleSimulation --> EcoPlanetaryRegenSubsystem : <<allocate>>
+SensingActuationAndDeployment --> BionanorobotSwarm : composition
+\end{lstlisting}
+
+\section{State Machine Diagram -- Intervention Authorization \& Sandbox Progression}
+
+\begin{lstlisting}[style=sysmlstyle]
+StateMachine: InterventionLifecycle
+[*] --> EthicsReview
+EthicsReview --> Authorized : ethicsBoard.approve()
+EthicsReview --> Rejected : ethicsBoard.reject()
+Authorized --> InVitroSandbox
+InVitroSandbox --> SmallAnimalSandbox : validation.pass()
+InVitroSandbox --> Paused : safetyTrigger()
+SmallAnimalSandbox --> ControlledPilot : validation.pass()
+ControlledPilot --> OperationalDeployment : regulatory.approval()
+OperationalDeployment --> Completed
+Paused --> EthicsReview : rootCauseResolved()
+\end{lstlisting}
+
+\end{document}
