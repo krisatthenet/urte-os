@@ -1,0 +1,13 @@
+# Rust build artifacts
+/kernel-rs/target/
+
+# C build artifacts
+*.o
+*.obj
+/urte_demo
+/urte_demo.exe
+
+# Editor / OS
+*.swp
+.DS_Store
+Thumbs.db

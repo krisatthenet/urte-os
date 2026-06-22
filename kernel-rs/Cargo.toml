@@ -1,0 +1,33 @@
+[package]
+name = "urte-kernel"
+version = "1.0.0"
+edition = "2021"
+description = "URTE OS kernel library (Rust rewrite) with POSIX-style core, compiler and interpreter layers"
+license = "Proprietary"
+
+[dependencies]
+# Lock-free MPMC channels: actor mailboxes + NiFi-style back-pressured connections
+crossbeam-channel = "0.5"
+# Data-parallel / parallel programming (work-stealing pool)
+rayon = "1"
+# Hyperthread / logical-CPU detection for default parallelism width
+num_cpus = "1"
+# NOTE: shared-state locking uses std::sync (Mutex/RwLock). parking_lot was
+# evaluated but its windows-gnu build requires MinGW `dlltool`, which is not
+# bundled with the rustup GNU toolchain; std locks are sufficient here.
+
+[lib]
+name = "urte_kernel"
+path = "src/lib.rs"
+
+[[example]]
+name = "run_pipeline"
+path = "examples/run_pipeline.rs"
+
+[[example]]
+name = "sql_mesh"
+path = "examples/sql_mesh.rs"
+
+[[example]]
+name = "rtos_flow"
+path = "examples/rtos_flow.rs"

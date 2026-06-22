@@ -1,0 +1,204 @@
+{
+  "$schema": "https://urte.org/schemas/core-model-1.0.json",
+  "project": "urtecore",
+  "source": "urtecore.capella (Capella 7.0.1, Arcadia method)",
+  "projectApproach": "SingletonComponents",
+  "note": "Extracted from the Capella MBSE model; supersedes the invalid urtecore.json (which was a saved HTML page).",
+  "scaleLevels": [
+    { "id": 0, "name": "MOLECULAR" },
+    { "id": 1, "name": "CELLULAR" },
+    { "id": 2, "name": "TISSUE" },
+    { "id": 3, "name": "ORGAN" },
+    { "id": 4, "name": "ECOSYSTEM" },
+    { "id": 5, "name": "BIOME" },
+    { "id": 6, "name": "PLANETARY" }
+  ],
+  "operationalAnalysis": {
+    "capabilities": ["OperationalCapability 1"],
+    "activityPipeline": [
+      "therapy delivery mitigation",
+      "reactor therapy assumption",
+      "measure selector check",
+      "measure compose",
+      "measure gathering",
+      "measure definition",
+      "hypothesis statement",
+      "operational status check",
+      "string comparison",
+      "Memorization",
+      "Data gathering",
+      "Sensing"
+    ],
+    "fabricationPipeline": [
+      "Sensing",
+      "Crawling",
+      "Selection",
+      "Fabrication",
+      "Assembly",
+      "Dissemination"
+    ],
+    "entities": {
+      "name": "Ecosystem",
+      "children": [
+        {
+          "name": "Biome",
+          "children": [
+            {
+              "name": "Pathological center [Biobank]",
+              "children": [
+                {
+                  "name": "Biomedical cluster",
+                  "children": [
+                    {
+                      "name": "Nanogenetic swarm",
+                      "children": [
+                        {
+                          "name": "Biological processor",
+                          "children": [
+                            {
+                              "name": "Tensor genetic circuit matrix",
+                              "children": [
+                                { "name": "AI core", "children": [
+                                  { "name": "AI operator", "actor": true, "human": true }
+                                ]}
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "actors": [
+      { "name": "AI operator", "human": true },
+      { "name": "Biomathematician", "human": true },
+      { "name": "Bioengineer", "human": true },
+      { "name": "System biologist", "human": true },
+      { "name": "Systematic medic", "human": true },
+      { "name": "Synthetic biologist", "human": true },
+      { "name": "Ecologist", "human": true },
+      { "name": "HAT interface", "human": true }
+    ]
+  },
+  "architectureLayers": {
+    "system":   { "component": "System",          "actors": ["Biomathematician"] },
+    "logical":  { "component": "Logical System" },
+    "physical": { "component": "Physical System" },
+    "epbs":     { "configurationItem": "System", "kind": "SystemCI" }
+  },
+  "dataSchema": {
+    "source": "urtecore.capella DataPkg 'Data' (packages: 'DATA schema package', 'Data Vault')",
+    "note": "Entity (relational) schema derived from MBSE Class/Property/Association definitions. Every association in the model has cardinality 1..1; properties are mapped to foreign keys, services to entity methods.",
+    "packages": [
+      {
+        "name": "DATA schema package",
+        "entities": [
+          {
+            "name": "Filter",
+            "table": "filter",
+            "summary": "Filter",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "heap1_id", "type": "uuid", "fk": "heap_1.id", "card": "1..1", "from": "heap 1" },
+              { "name": "stream_ops_id", "type": "uuid", "fk": "stream_ops.id", "card": "1..1", "from": "streamOps" }
+            ],
+            "methods": ["Patterning"]
+          },
+          {
+            "name": "Heap 1",
+            "table": "heap_1",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "heap2_id", "type": "uuid", "fk": "heap_2.id", "card": "1..1", "from": "heap 2" },
+              { "name": "stream_ops_id", "type": "uuid", "fk": "stream_ops.id", "card": "1..1", "from": "streamOps" }
+            ],
+            "methods": ["Cache"]
+          },
+          {
+            "name": "Heap 2",
+            "table": "heap_2",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "shuffler_id", "type": "uuid", "fk": "shuffler.id", "card": "1..1", "from": "shuffler" },
+              { "name": "stream_ops_id", "type": "uuid", "fk": "stream_ops.id", "card": "1..1", "from": "streamOps" }
+            ],
+            "methods": ["Buffer"]
+          },
+          {
+            "name": "Shuffler",
+            "table": "shuffler",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "stream_ops_id", "type": "uuid", "fk": "stream_ops.id", "card": "1..1", "from": "streamOps" }
+            ],
+            "methods": ["Alligment"]
+          },
+          {
+            "name": "StreamOps",
+            "table": "stream_ops",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "heap_controler_id", "type": "uuid", "fk": "heap_controler.id", "card": "1..1", "from": "heap controler" },
+              { "name": "divinity_buffer_id", "type": "uuid", "fk": "divinity_buffer.id", "card": "1..1", "from": "divinity buffer" },
+              { "name": "trinity_buffer_id", "type": "uuid", "fk": "trinity_buffer.id", "card": "1..1", "from": "trinity buffer" }
+            ],
+            "methods": ["DataMesh"]
+          }
+        ]
+      },
+      {
+        "name": "Data Vault",
+        "entities": [
+          {
+            "name": "Heap controler",
+            "table": "heap_controler",
+            "columns": [
+              { "name": "id", "type": "uuid", "pk": true },
+              { "name": "divinity_buffer_id", "type": "uuid", "fk": "divinity_buffer.id", "card": "1..1", "from": "divinity buffer" },
+              { "name": "trinity_buffer_id", "type": "uuid", "fk": "trinity_buffer.id", "card": "1..1", "from": "trinity buffer" }
+            ],
+            "methods": ["Index"]
+          },
+          {
+            "name": "Divinity buffer",
+            "table": "divinity_buffer",
+            "columns": [ { "name": "id", "type": "uuid", "pk": true } ],
+            "methods": ["Block"]
+          },
+          {
+            "name": "Trinity buffer",
+            "table": "trinity_buffer",
+            "columns": [ { "name": "id", "type": "uuid", "pk": true } ],
+            "methods": ["Block II"]
+          },
+          {
+            "name": "Class 1_2",
+            "table": "class_1_2",
+            "columns": [ { "name": "id", "type": "uuid", "pk": true } ],
+            "methods": []
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      { "from": "filter",          "to": "heap_1",         "via": "heap 1",          "card": "1..1" },
+      { "from": "filter",          "to": "stream_ops",     "via": "streamOps",       "card": "1..1" },
+      { "from": "heap_1",          "to": "heap_2",         "via": "heap 2",          "card": "1..1" },
+      { "from": "heap_1",          "to": "stream_ops",     "via": "streamOps",       "card": "1..1" },
+      { "from": "heap_2",          "to": "shuffler",       "via": "shuffler",        "card": "1..1" },
+      { "from": "heap_2",          "to": "stream_ops",     "via": "streamOps",       "card": "1..1" },
+      { "from": "shuffler",        "to": "stream_ops",     "via": "streamOps",       "card": "1..1" },
+      { "from": "stream_ops",      "to": "heap_controler", "via": "heap controler",  "card": "1..1" },
+      { "from": "stream_ops",      "to": "divinity_buffer","via": "divinity buffer", "card": "1..1" },
+      { "from": "stream_ops",      "to": "trinity_buffer", "via": "trinity buffer",  "card": "1..1" },
+      { "from": "heap_controler",  "to": "divinity_buffer","via": "divinity buffer", "card": "1..1" },
+      { "from": "heap_controler",  "to": "trinity_buffer", "via": "trinity buffer",  "card": "1..1" }
+    ]
+  }
+}
