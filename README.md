@@ -5,6 +5,7 @@
 [![Last commit](https://img.shields.io/github/last-commit/krisatthenet/urte-os)](https://github.com/krisatthenet/urte-os/commits/master)
 [![Rust](https://img.shields.io/badge/Rust-1.96-000000?logo=rust)](kernel-rs/)
 [![POSIX](https://img.shields.io/badge/POSIX-IEEE%20Std%201003.1--2024-0033cc)](docs/URTE_POSIX_Kernel_Technical_Specification.pdf)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey)](LICENSE)
 
 POSIX-conformant core of the operating system for the **Universal Regeneration
 Therapy Ecosystem (URTE)**. The interface and structure follow
@@ -82,3 +83,14 @@ Interface layer: **complete**.
 - Remaining subsystem mechanics (scheduling, state-vector memory mapping,
   LSM/guardrail hooks) are stubbed with `ENOSYS`/`TODO` and ready for
   kernel-side implementation.
+
+## License
+
+Copyright © 2026 Kristupas Gelžinis. All rights reserved except as granted below.
+
+This work — source code, models, and documentation — is licensed under the
+**Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International**
+license (CC BY-NC-ND 4.0). You may share it with attribution, but **commercial
+use** and **distribution of modified versions** are not permitted without
+explicit written permission. Full text in [`LICENSE`](LICENSE); summary at
+<https://creativecommons.org/licenses/by-nc-nd/4.0/>.

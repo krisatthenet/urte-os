@@ -3,7 +3,7 @@ name = "urte-kernel"
 version = "1.0.0"
 edition = "2021"
 description = "URTE OS kernel library (Rust rewrite) with POSIX-style core, compiler and interpreter layers"
-license = "Proprietary"
+license = "CC-BY-NC-ND-4.0"
 
 [dependencies]
 # Lock-free MPMC channels: actor mailboxes + NiFi-style back-pressured connections
