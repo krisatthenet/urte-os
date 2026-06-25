@@ -1,7 +1,5 @@
 # URTE OS Core
 
-<iframe src="https://github.com/sponsors/krisatthenet/card" title="Sponsor krisatthenet" height="225" width="600" style="border: 0;"></iframe>
-
 <img width="1168" height="784" alt="Myk5M" src="https://github.com/user-attachments/assets/b485a1ec-814f-41a6-9cde-f9900a378aa8" />
 
 
@@ -89,6 +87,17 @@ Interface layer: **complete**.
   LSM/guardrail hooks) are stubbed with `ENOSYS`/`TODO` and ready for
   kernel-side implementation.
 
+## Model → OS mapping
+
+| Capella model element                         | OS core construct |
+|-----------------------------------------------|-------------------|
+| Operational Entity hierarchy (Ecosystem→AI core) | `urte_scale_level_t` (`types.h`) |
+| OA activity chain (Sensing → … → therapy delivery mitigation) | `urte_stage_t` + `k_pipeline[]` (`urte_core.c`) |
+| Fabrication flow (Crawling→…→Dissemination)   | actuation path behind guardrails |
+| System / Logical / Physical components        | subsystem init (`urte_core_init`) |
+| EPBS Configuration Item "System" (SystemCI)   | bootable core image |
+| Human actors (Biomathematician, Ethics, …)    | `urte_proc_role_t`, Ethics Board veto |
+
 ## License
 
 Copyright © 2026 Kristupas Gelžinis and Olek Suchodolski. All rights reserved except as granted below.
@@ -99,3 +108,9 @@ license (CC BY-NC-ND 4.0). You may share it with attribution, but **commercial
 use** and **distribution of modified versions** are not permitted without
 explicit written permission. Full text in [`LICENSE`](LICENSE); summary at
 <https://creativecommons.org/licenses/by-nc-nd/4.0/>.
+
+## Support / Donate
+
+[![Sponsor](https://img.shields.io/badge/Donate-GitHub%20Sponsors-181717?logo=github&logoColor=white)](https://github.com/sponsors/krisatthenet)
+
+If you find URTE OS useful, consider sponsoring development on GitHub Sponsors — thank you for your support!
