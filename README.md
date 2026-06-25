@@ -1,5 +1,8 @@
 # URTE OS Core
 
+<img width="1168" height="784" alt="Myk5M" src="https://github.com/user-attachments/assets/b485a1ec-814f-41a6-9cde-f9900a378aa8" />
+
+
 [![CI](https://github.com/krisatthenet/urte-os/actions/workflows/ci.yml/badge.svg)](https://github.com/krisatthenet/urte-os/actions/workflows/ci.yml)
 [![Repo](https://img.shields.io/badge/GitHub-krisatthenet%2Furte--os-181717?logo=github)](https://github.com/krisatthenet/urte-os)
 [![Last commit](https://img.shields.io/github/last-commit/krisatthenet/urte-os)](https://github.com/krisatthenet/urte-os/commits/master)
