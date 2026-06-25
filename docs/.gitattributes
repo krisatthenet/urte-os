@@ -1,0 +1,8 @@
+# Keep synced text files as LF so the sync hook doesn't create EOL churn.
+*.html text eol=lf
+*.css  text eol=lf
+# Binary assets — never normalize.
+*.woff2 binary
+*.jpg   binary
+*.png   binary
+*.mp4   binary
