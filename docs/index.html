@@ -36,10 +36,10 @@
           <a href="#community" class="hover:text-cyan2 transition">Community</a>
         </div>
         <div class="flex items-center gap-2">
-          <a id="navForumBtn" href="#community"
+          <a id="navForumBtn" href="https://forum.equalibrinium.com/" target="_blank" rel="noopener"
              class="group inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan2 to-green2 px-4 py-2 text-sm font-bold text-ink hover:scale-[1.03] transition">
             <span class="h-1.5 w-1.5 rounded-full bg-ink/70" id="navForumDot"></span>
-            Forum
+            Forum ↗
           </a>
           <a href="#contact" class="hidden sm:inline-block rounded-xl bg-white/5 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 hover:bg-cyan2 hover:text-ink hover:ring-cyan2 transition">
             Get in touch
@@ -642,11 +642,11 @@
             <li class="flex gap-2"><span class="text-green2">›</span> Collaborators &amp; stars</li>
           </ul>
           <div class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <a id="forumLaunch" href="http://127.0.0.1:8080/" target="_blank" rel="noopener"
+            <a id="forumLaunch" href="https://forum.equalibrinium.com/" target="_blank" rel="noopener"
                class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan2 to-green2 px-7 py-3.5 text-sm font-bold text-ink glow-cyan hover:scale-[1.03] transition">
-              Launch the Forum ↗
+              Open the Forum ↗
             </a>
-            <code class="rounded-lg border border-white/10 bg-ink2 px-3 py-2 font-mono text-xs text-slate-400">cd urte-forum &amp;&amp; cargo run --release</code>
+            <code class="rounded-lg border border-white/10 bg-ink2 px-3 py-2 font-mono text-xs text-slate-400">forum.equalibrinium.com</code>
           </div>
         </div>
 
@@ -668,8 +668,7 @@
             <div class="bg-ink2/60 p-4 text-center"><div class="grad-text text-2xl font-black" data-stat="posts">—</div><div class="mt-1 text-[11px] uppercase tracking-wider text-slate-400">Posts</div></div>
           </div>
           <p id="forumHint" class="mt-4 text-xs text-slate-500">
-            The widget polls <span class="font-mono text-slate-400">http://127.0.0.1:8080/api/stats</span>. Start the
-            Rust service to see it go live.
+            The widget polls <span class="font-mono text-slate-400">forum.equalibrinium.com/api/stats</span> live.
           </p>
         </div>
       </div>
@@ -858,14 +857,14 @@
     // ---------------------------------------------------------------
     // Interactive: live forum status widget
     // ---------------------------------------------------------------
-    const FORUM_URL = 'http://127.0.0.1:8080';
+    const FORUM_URL = 'https://forum.equalibrinium.com';
     async function pollForum() {
       const dot = document.getElementById('forumStatusDot');
       const txt = document.getElementById('forumStatusText');
       const navDot = document.getElementById('navForumDot');
       try {
         const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), 2000);
+        const timer = setTimeout(() => ctrl.abort(), 3500);
         const res = await fetch(FORUM_URL + '/api/stats', { signal: ctrl.signal });
         clearTimeout(timer);
         if (!res.ok) throw new Error('bad status');
@@ -877,13 +876,13 @@
           const v = s[el.dataset.stat];
           if (v !== undefined) el.textContent = fmt(v);
         });
-        document.getElementById('forumHint').textContent = 'Connected to your local URTE Forum instance.';
+        document.getElementById('forumHint').textContent = 'Connected to the URTE Forum at forum.equalibrinium.com.';
       } catch (e) {
         dot.className = 'h-2 w-2 rounded-full bg-slate-500';
         txt.textContent = 'Offline';
         document.querySelectorAll('[data-stat]').forEach((el) => (el.textContent = '—'));
         document.getElementById('forumHint').innerHTML =
-          'Forum not detected. Run <span class="font-mono text-slate-400">cd urte-forum &amp;&amp; cargo run --release</span> and this widget goes live.';
+          'Could not reach <span class="font-mono text-slate-400">forum.equalibrinium.com</span> right now — it may be starting up.';
       }
     }
     // Poll when the community section first comes into view, then every 15s.
